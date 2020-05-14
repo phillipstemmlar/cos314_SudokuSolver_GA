@@ -6,12 +6,14 @@ public class Main{
 	static final File folder = new File("./sudokus");
 
 	public static void main(String[] args) {
-		List<String> files	= listFilesForFolder(folder);
-		System.out.println("=========================================");
-		for( String file : files){
-			Solve(file);
-		}
-		System.out.println("=========================================");
+		Test(args[0], args[1]);
+
+		// List<String> files	= listFilesForFolder(folder);
+		// // System.out.println("=========================================");
+		// for( String file : files){
+		// 	Test(file);
+		// }
+		// System.out.println("=========================================");
 	}
 
 	public static List<String> listFilesForFolder(final File folder) {
@@ -27,14 +29,21 @@ public class Main{
 		return res;
 	}
 
-	public static void Solve(String filename){
+	public static void Solve(String params, String filename){
+		Sudoku sud = new Sudoku(params,filename);
+		sud.solve();
+		System.out.println("");
+		Helper.saveCursor();
+	}
+
+	public static void Test(String params, String filename){
 		String sudFile = filename;
 		String solFile = sudFile.replace("sudokus", "solutions").replace(".txt", "_s.txt");
 
-		Sudoku sud = new Sudoku(sudFile);
+		Sudoku sud = new Sudoku(params,filename);
 		Solution sol = new Solution(solFile);
 
-		sud.solve(sol.values);
+		sud.solve();
 
 		// sol.printValues();
 
@@ -43,6 +52,8 @@ public class Main{
 		}else{
 			System.out.println(filename + "\t - WRONG!");
 		}
+		System.out.println("");
+		Helper.saveCursor();
 	}
 
 }

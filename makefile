@@ -6,21 +6,21 @@ BIN=./bin
 JAR_FILE=COS314_A2.jar
 MANIFEST_FILE=Manifest.txt
 INPUT_FILE=./sudokus/s01a.txt
+PARAMS_FILE=./params.txt
 
 make: *.java
 	$(CC) *.java
 
 jar: make
 	$(JAR) cmvf $(MANIFEST_FILE) $(JAR_FILE) *.class 
-	# cp $(INPUT_FILE) ${BIN}
 	mv $(JAR_FILE) ${BIN}
 
 run: 
-	$(EXE) $(MAIN) $(INPUT_FILE)
+	clear
+	$(EXE) $(MAIN) $(PARAMS_FILE) $(INPUT_FILE)
 
 exec:
-	${EXE} -${JAR} ${BIN}/${JAR_FILE}
-	#${BIN}/$(INPUT_FILE)
+	${EXE} -${JAR} ${BIN}/${JAR_FILE} $(PARAMS_FILE) $(INPUT_FILE)
 
 clean:
 	-rm *.class
@@ -29,5 +29,4 @@ wipe: clean
 	-rm ${BIN}/*
 
 again: make
-	clear
 	make run

@@ -67,6 +67,25 @@ public class Helper {
 		return Math.round(value * tens) / tens;
 	}
 
+	public static Boolean contains(int[] array, int value){
+		for(int i = 0; i < array.length; ++i){
+			if(array[i] == value) return true;
+		}
+		return false;
+	}
+
+	public static int index( int c_x, int r_y, int width){
+		return r_y * width + c_x;
+	}
+
+	public static int row_y(int index, int width){
+		return index / width;
+	}
+
+	public static int col_x(int index, int width){
+		return index % width;
+	}
+
 	public static void saveCursor(){System.out.print("\0337");}
 	public static void restoreCursor(){System.out.print("\0338");}
 	public static void eraseLine(){System.out.print("\033[K");}

@@ -5,53 +5,49 @@ public class Sudoku {
 	public final Integer[][] initValues;
 	public Integer[][] values;
 
-	public Boolean logging = false;
+	public Boolean logging = true;
 	final int N = 9;
 
 	Evolution  evo;
 
-	public Sudoku(String sudokuFile){
-		initValues = parseValueList(Helper.removeWhiteSpace(Helper.filetoString(sudokuFile)));
-		// initValues = parseValueList(Helper.removeWhiteSpace("8 4 5 6 3 2 1 7 9 7 3 2 9 1 8 6 5 4 1 9 6 7 4 5 3 2 8 6 8 3 5 7 4 9 1 2 4 5 7 2 9 1 8 3 6 2 1 9 8 6 3 5 4 7 3 6 1 4 2 9 7 8 5 5 7 4 1 8 6 2 9 3 9 2 8 3 5 7 4 6 1 "));
+	int pop ;
+	int elitism ;
+	double mut;
+	int maxgen;
+
+	public Sudoku(String paramsFile, String sudokuFile){
+		initValues = parseValueFile(sudokuFile);
 		values = null;
 		evo = null;
+
+		double[] params = parseParamFile(paramsFile); 
+
+		pop = (int)Math.floor(params[0]);
+		elitism = (int)Math.floor(params[1]);
+		mut = params[2];
+		maxgen = (int)Math.floor(params[3]);
 	}
 	
-	public void solve(Integer[][] answer){
+	public void solve(){
 		// line();
 		// printInitValues();
 		// line();
 
-		int pop = 1000;
-		double mut = 0.03;
-
-		evo = new Evolution(initValues, mut, N, answer);
+		evo = new Evolution(initValues, N);
 		evo.generatePopulation(pop);
-		
-		// Element el = evo.elements.get(0);
-		
-		// el.print();
-
-		// int ro = 0;
-		// int co = 0;
-
-		// el.calcFitness();
-
-		// evo.best = el;
-		// evo.printBest();
-
-		evo.runSimulation();
+		evo.runSimulation(mut,elitism,maxgen);
 		Element res = evo.winner;
 
 		if(res == null){
-			// line();
-			// System.out.println("Res is null");
+			line();
+			evo.printBest();
+			values = evo.best.values;
 		}else{
 			evo.best = res;
-			// evo.printBest();
-			// line();
-			// res.print();
-			// line();
+			evo.printBest();
+			line();
+			res.print();
+			line();
 			values = res.values;
 		}
 
@@ -62,7 +58,8 @@ public class Sudoku {
 		return evo.genCount;
 	}
 
-	private Integer[][] parseValueList(String values){
+	private Integer[][] parseValueFile(String valuesFile){
+		String values = Helper.removeWhiteSpace(Helper.filetoString(valuesFile));
 		Integer[][] res = new Integer[N][N];
 		for(int i = 0; i < N; ++i){
 			for(int j = 0; j < N; ++j){
@@ -88,6 +85,30 @@ public class Sudoku {
 				log(Helper.newline);
 			}
 		}
+	}
+
+	public double[] parseParamFile(String paramsInputFile){
+		String paramsFile = Helper.filetoString(paramsInputFile);
+		// System.out.println(paramsFile);
+		
+		double[] result = new double[4];
+		try{
+			int prev = 0;
+			int pos = 0;
+			for(int i = 0; i < 4; ++i){
+				pos = paramsFile.indexOf("\n",prev);
+				if(pos < 0) pos = paramsFile.length();
+				result[i] = Double.parseDouble(paramsFile.substring(prev, pos));
+				prev = pos+1;
+			}
+
+		}catch(StringIndexOutOfBoundsException e){
+			System.out.println("Error in parameter file: " + paramsInputFile);
+		}
+
+		// System.out.println(Arrays.toString(result));
+
+		return result;
 	}
 
 	private void line(){logln("=========================================");}
