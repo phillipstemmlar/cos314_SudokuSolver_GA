@@ -2,13 +2,12 @@
 Genetic Alogrithm that solves sudokus.<br/>
 
 This repository contains a Genetic Algorithm written in JAVA, that takes an empty sudoku puzzle with only the initial values filled in as input and then correctly generates the solution to the sudoku puzzle.
-
 <br/>
 ****************************************************************************************************************<br/>
 PLEASE CLEAR THE TERMINAL EVERYTIME BEFORE YOUR RUN THE PROGRAM, OTHERWISE THE OUTPUT GETS MESSED UP. THANK YOU.<br/>
 ****************************************************************************************************************<br/>
 <br/>
-==================================JAR FILE==========================================<br/>
+================JAR FILE================br/>
 <br/>
 To compile the code into a JAR file, use
 
@@ -20,7 +19,7 @@ To run the JAR file, called COS314_A2_u18171185.jar, use
 
 	java -jar COS314_A2_u18171185.jar <param-file> <suduko-file>
 <br/>
-==================================JAVA FILE=========================================<br/>
+================JAVA FILE================br/>
 <br/>
 To compile the code into Java Class files, use
 
@@ -32,7 +31,7 @@ The Main Java Main is the Compiler Class. To run it, use
 
 	java Main <param-file> <suduko-file>
 <br/>
-===================================PARAMETER FILE FORMAT=============================<br/>
+================PARAMETER FILE FORMAT================br/>
 <br/>
 Given filename: params.txt<br/>
 Content:
@@ -49,7 +48,7 @@ The 4th value (200)  specifies the number of generations, where no improvements 
 <br/>
 *Each value has to be on a new line with no empty lines in between.<br/>
 <br/>
-===================================DEVELOPMENT ENVIRONMENT===========================<br/>
+================DEVELOPMENT ENVIRONMENT================br/>
 <br/>
 openjdk 11.0.7 2020-04-14<br/>
 OpenJDK Runtime Environment (build 11.0.7+10-post-Ubuntu-2ubuntu218.04)<br/>
