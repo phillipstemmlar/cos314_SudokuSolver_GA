@@ -1,5 +1,8 @@
 # cos314_SudokuSolver_GA
 Genetic Alogrithm that solves sudokus.<br/>
+
+This repository contains a Genetic Algorithm written in JAVA, that takes an empty sudoku puzzle with only the initial values filled in as input and then correctly generates the solution to the sudoku puzzle.
+
 <br/>
 ****************************************************************************************************************<br/>
 PLEASE CLEAR THE TERMINAL EVERYTIME BEFORE YOUR RUN THE PROGRAM, OTHERWISE THE OUTPUT GETS MESSED UP. THANK YOU.<br/>
